@@ -1,0 +1,10 @@
+[package]
+name = "exonum-services-docker"
+version = "0.1.0"
+authors = ["VladYermakov <yermakov.v.o@gmail.com>"]
+
+[dependencies]
+exonum = "0.7.0"
+exonum-time = "0.7.0"
+exonum-btc-anchoring = "0.7.0"
+exonum-configuration = "0.7.0"
