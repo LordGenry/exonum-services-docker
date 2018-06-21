@@ -17,4 +17,5 @@ Or run commands one by one
 `./prepare.sh` - run bitcoind image and waiting for balance to be sufficient and save
 bitcoin network to btc_anchoring volume
 
-`./run.sh` - run nodes with loaded bitcoin in btc_anchoring volume  
+`./run.sh $node_count $validator_count` - run nodes with loaded bitcoin in btc_anchoring
+volume with given `$node_count` and `$validator_count`
