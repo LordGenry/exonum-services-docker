@@ -5,7 +5,18 @@ export RUST_BACKTRACE=1
 
 PATH=$PATH:~/.cargo/bin/
 
+if [ $# -lt 2 ]; then
+    echo "Not enough arguments, please provide node count and validator count"
+    exit
+fi
+
 node_count=$1
+validator_count=$2
+
+if [ $(node_count) -lt $(validators_count) ] || [ $(validator_count) -eq 0 ]; then
+    echo "Please enter valid count of validators"
+    exit
+fi
 
 bitcoind
 
@@ -25,13 +36,31 @@ done
 
 echo ""
 
-services generate-template common.toml --validators-count ${node_count} \
+services generate-template common.toml --validators-count ${validator_count} \
     --anchoring-network testnet \
     --anchoring-fee 10000 \
     --anchoring-frequency 200 \
     --anchoring-utxo-confirmations 1
 
-for i in $(seq 1 $((node_count)) )
+for i in $(seq 1 $((validator_count)) )
+do
+    port=$((17031 - $((node_count)) + i))
+    services generate-config common.toml \
+        pub_${i}.toml \
+        sec_${i}.toml \
+        --anchoring-host=http://127.0.0.1:18332 \
+        --peer-address 127.0.0.1:${port} \
+        --anchoring-user=testnet \
+        --anchoring-password=testnet
+
+    VALIDATORS="${VALIDATORS} pub_${i}.toml"
+#    echo "==============================="
+    echo "generated config for node ${i}:"
+#    echo "$(cat pub_${i}.toml) $(cat sec_${i}.toml)"
+    echo ""
+done
+
+for i in $(seq $(( $((validator_count)) + 1 )) $((node_count)) )
 do
     port=$((17031 - $((node_count)) + i))
     services generate-config common.toml \

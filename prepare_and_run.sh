@@ -2,5 +2,5 @@
 
 ./build.sh
 ./prepare.sh
-./run.sh
+./run.sh $1 $2
 
