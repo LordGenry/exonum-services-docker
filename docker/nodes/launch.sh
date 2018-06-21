@@ -71,7 +71,6 @@ do
         --anchoring-user=testnet \
         --anchoring-password=testnet
 
-    VALIDATORS="${VALIDATORS} pub_${i}.toml"
 #    echo "==============================="
     echo "generated config for node ${i}:"
 #    echo "$(cat pub_${i}.toml) $(cat sec_${i}.toml)"
