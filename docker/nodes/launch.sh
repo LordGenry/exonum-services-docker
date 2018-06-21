@@ -13,7 +13,7 @@ fi
 node_count=$1
 validator_count=$2
 
-if [ $(node_count) -lt $(validators_count) ] || [ $(validator_count) -eq 0 ]; then
+if [ $((node_count)) -lt $((validator_count)) ] || [ $((validator_count)) -eq 0 ]; then
     echo "Please enter valid count of validators"
     exit
 fi
