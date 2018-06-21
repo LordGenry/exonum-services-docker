@@ -1,6 +1,6 @@
 To build and run node with anchoring & service & time:
 ```bash
-./prepare_and_run.sh
+./build_and_run.sh
 ```
 Or run commands one by one
 ```bash
